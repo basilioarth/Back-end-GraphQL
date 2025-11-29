@@ -1,33 +1,28 @@
+import express from 'express';
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
-
-const typeDefs = `
-    type Query {
-        helloWorld: String
-    }
-`;
-
-const resolvers = {
-    Query: {
-        helloWorld: () => {
-            return 'Hello World!';
-        },
-    },
-};
+import { expressMiddleware } from '@as-integrations/express5';
+import { buildSchema } from 'type-graphql';
 
 async function bootstrap() {
+    const app = express();
+
+    const schema = await buildSchema({
+        resolvers: [],
+        validate: false,
+        emitSchemaFile: './schema.graphql',
+    });
+
     const server = new ApolloServer({
-        typeDefs,
-        resolvers,
+        schema,
     });
 
-    const { url } = await startStandaloneServer(server, {
-        listen: {
-            port: 4000
-        }
-    });
+    await server.start();
 
-    console.log(`Servidor iniciado em ${url}`);
+    app.use('/graphql', express.json(), expressMiddleware(server));
+
+    app.listen(4000, () => {
+        console.log('Servidor iniciado em http://localhost:4000/graphql');
+    });
 }
 
 bootstrap();
