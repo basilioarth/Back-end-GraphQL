@@ -13,6 +13,10 @@ export class IdeaService {
         });
     };
 
+    async listIdeas() {
+        return prismaClient.idea.findMany();
+    }
+
     async updateIdea(id: string, data: UpdateIdeaInput) {
         const idea = await prismaClient.idea.findUnique({
             where: {
@@ -27,6 +31,22 @@ export class IdeaService {
             data: {
                 title: data.title,
                 description: data.description
+            }
+        });
+    }
+
+    async deleteIdea(id: string) {
+        const findedIdea = await prismaClient.idea.findUnique({
+            where: {
+                id: id
+            }
+        });
+
+        if (!findedIdea) throw new Error('Ideia não encontrada');
+
+        return prismaClient.idea.delete({
+            where: {
+                id: id
             }
         });
     }
