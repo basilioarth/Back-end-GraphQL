@@ -1,13 +1,18 @@
 {
   "compilerOptions": {
-    "rootDir": ["src"],
-    "outDir": ["dist"],
-    "lib": ["es2023", "dom"],
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": [
+      "es2023",
+      "dom"
+    ],
     "target": "es2023",
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
   }
