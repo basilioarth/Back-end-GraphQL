@@ -5,6 +5,7 @@ import { expressMiddleware } from '@as-integrations/express5';
 import { buildSchema } from 'type-graphql';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { UserResolver } from './resolvers/user.resolver';
+import { buildContext } from './graphql/context';
 
 async function bootstrap() {
     const app = express();
@@ -21,7 +22,9 @@ async function bootstrap() {
 
     await server.start();
 
-    app.use('/graphql', express.json(), expressMiddleware(server));
+    app.use('/graphql', express.json(), expressMiddleware(server, {
+        context: buildContext
+    }));
 
     app.listen(4000, () => {
         console.log('Servidor iniciado em http://localhost:4000/graphql');
