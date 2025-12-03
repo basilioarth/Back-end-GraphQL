@@ -12,6 +12,9 @@ export class UserModel {
     email!: string
 
     @Field(() => String, { nullable: true })
+    role?: string
+
+    @Field(() => String, { nullable: true })
     password?: string
 
     @Field(() => GraphQLISODateTime)

@@ -96,6 +96,7 @@ type UserModel {
   id: ID!
   name: String!
   password: String
+  role: String
   updatedAt: DateTimeISO!
 }
 
