@@ -50,6 +50,13 @@ export class IdeaResolver {
         return this.ideaService.listIdeas();
     }
 
+    @Query(() => IdeaModel)
+    async getIdea(
+        @Arg('id', () => String) id: string
+    ): Promise<IdeaModel> {
+        return this.ideaService.findIdeaById(id);
+    }
+
     @FieldResolver(() => UserModel)
     async author(@Root() idea: IdeaModel): Promise<UserModel> {
         return this.userService.findUser(idea.authorId);
