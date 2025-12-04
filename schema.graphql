@@ -72,6 +72,7 @@ type Query {
   getIdea(id: String!): IdeaModel!
   getUser(id: String!): UserModel!
   listIdeas: [IdeaModel!]!
+  listUsers: [UserModel!]!
 }
 
 input RegisterInput {

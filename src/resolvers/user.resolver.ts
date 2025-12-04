@@ -22,4 +22,9 @@ export class UserResolver {
     ): Promise<UserModel> {
         return this.userService.findUser(id);
     };
+
+    @Query(() => [UserModel])
+    async listUsers(): Promise<UserModel[]> {
+        return this.userService.listUsers();
+    };
 }
