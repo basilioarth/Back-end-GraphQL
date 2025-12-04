@@ -58,7 +58,7 @@ type LoginOutput {
 }
 
 type Mutation {
-  CreateComment(data: CreateCommentInput!, ideaId: String!): CommentModel!
+  createComment(data: CreateCommentInput!, ideaId: String!): CommentModel!
   createIdea(data: CreateIdeaInput!): IdeaModel!
   createUser(data: CreateUserInput!): UserModel!
   deleteIdea(id: String!): Boolean!

@@ -16,7 +16,7 @@ export class CommentResolver {
     private userService = new UserService();
 
     @Mutation(() => CommentModel)
-    async CreateComment(
+    async createComment(
         @Arg('ideaId', () => String) ideaId: string,
         @Arg('data', () => CreateCommentInput) data: CreateCommentInput,
         @GqlUser() user: User
