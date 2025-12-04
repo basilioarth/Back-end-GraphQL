@@ -16,6 +16,15 @@ export class UserResolver {
         return this.userService.createUser(data);
     };
 
+    @Mutation(() => Boolean)
+    async deleteUser(
+        @Arg('id', () => String) id: string
+    ): Promise<Boolean> {
+        await this.userService.deleteUser(id);
+
+        return true;
+    }
+
     @Query(() => UserModel)
     async getUser(
         @Arg('id', () => String) id: string

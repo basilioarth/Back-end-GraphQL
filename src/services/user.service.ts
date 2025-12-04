@@ -34,4 +34,20 @@ export class UserService {
     async listUsers() {
         return await prismaClient.user.findMany();
     }
+
+    async deleteUser(id: string) {
+        const findedUser = await prismaClient.user.findUnique({
+            where: {
+                id: id
+            }
+        });
+
+        if (!findedUser) throw new Error('Usuário não encontrado');
+
+        return prismaClient.user.delete({
+            where: {
+                id: id
+            }
+        });
+    }
 }
